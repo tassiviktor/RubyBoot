@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.4.0'
-gem 'rails', '~> 5.0.6'
+ruby '2.5.0'
+gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 #gem 'rhebok'
@@ -9,6 +9,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
+gem 'connection_pool'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

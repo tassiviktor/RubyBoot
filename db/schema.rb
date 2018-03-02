@@ -10,20 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130093043) do
+ActiveRecord::Schema.define(version: 20180201152321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "partners", force: :cascade do |t|
-    t.string   "name",          null: false
-    t.string   "contact_email", null: false
-    t.datetime "archived_at"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["archived_at"], name: "index_partners_on_archived_at", using: :btree
-    t.index ["created_at"], name: "index_partners_on_created_at", using: :btree
-    t.index ["updated_at"], name: "index_partners_on_updated_at", using: :btree
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "key"
+    t.boolean  "is_master_key",   default: false
+    t.string   "key_description"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end
