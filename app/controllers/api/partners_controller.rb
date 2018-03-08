@@ -10,7 +10,7 @@ class Api::PartnersController < ApplicationController
 
   # GET /api/partners/1
   def show
-    render json: @api_partner
+    render json: {} #@api_partner
   end
 
   # POST /api/partners
@@ -41,7 +41,9 @@ class Api::PartnersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api_partner
-      @api_partner = Api::Partner.find(params[:id])
+
+      #@api_partner = Api::Partner.find(params[:id])
+      
     end
 
     # Only allow a trusted parameter "white list" through.

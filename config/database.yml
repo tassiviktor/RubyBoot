@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
@@ -22,6 +22,6 @@ test:
 
 production:
   <<: *default
-  database: oneminv2_prod
-  username: oneminv2
+  database: <%= ENV['ONEMIN_DATABASE_DBNAME'] %>
+  username: <%= ENV['ONEMIN_DATABASE_USERNAME'] %>
   password: <%= ENV['ONEMIN_DATABASE_PASSWORD'] %>
