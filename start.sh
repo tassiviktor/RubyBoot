@@ -1,0 +1,1 @@
+RAILS_MAX_THREADS=5 WEB_CONCURRENCY=3 bundle exec puma -C config/puma.rb
