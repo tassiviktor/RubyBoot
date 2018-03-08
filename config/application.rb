@@ -27,6 +27,19 @@ module MyApplication
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.time_zone = 'UTC'
+    config.encoding = "utf-8"
     config.active_record.default_timezone = :utc
+    
+    # Autoloads
+    config.autoload_paths << Rails.root.join('lib')
+
+    #Logger
+    unless Rails.env.test?
+      log_level = String(ENV['LOG_LEVEL'] || "INFO")
+      config.logger = Logger.new(STDOUT)
+      config.logger.level = Logger.const_get(log_level)
+      config.log_level = log_level
+    end
+
   end
 end
