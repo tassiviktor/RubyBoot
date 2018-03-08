@@ -22,6 +22,6 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['ONEMIN_DATABASE_DBNAME'] %>
-  username: <%= ENV['ONEMIN_DATABASE_USERNAME'] %>
-  password: <%= ENV['ONEMIN_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_DBNAME'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
