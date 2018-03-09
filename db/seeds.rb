@@ -5,4 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Api::Partner.create(name: "SuperPartner", contact_email: "viktor.tassi@oneminorder.com")
+System::Models::ApiKey.create(key: "0e1354adf510ad53beb5d3c513f14d96e8fe12fed86731101752ac74bbd6d052", is_master_key: true)

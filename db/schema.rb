@@ -15,12 +15,15 @@ ActiveRecord::Schema.define(version: 20180201152321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "api_keys", force: :cascade do |t|
-    t.string   "key"
-    t.boolean  "is_master_key",   default: false
-    t.string   "key_description"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+  create_table "api_keys", id: :serial, force: :cascade do |t|
+    t.string "key"
+    t.text "ip_whitelist"
+    t.text "ip_blacklist"
+    t.boolean "is_master_key", default: false
+    t.string "key_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_api_keys_on_key", unique: true
   end
 
 end
