@@ -12,6 +12,9 @@ module System
       end
 
       def self.authorize_key(key, client_ip)
+
+        return false if key.blank?
+
         apikey = System::Cache::hgetall(CATEGORY_NAME, key)
         if apikey.blank?
           apikey = System::Models::ApiKey.where(key: key).first

@@ -40,6 +40,6 @@ module MyApplication
       config.logger.level = Logger.const_get(log_level)
       config.log_level = log_level
     end
-
+    
   end
 end

@@ -56,9 +56,7 @@ on_worker_boot do
     config['pool']              = (ENV['RAILS_MAX_THREADS']  || 5)*2
     ActiveRecord::Base.establish_connection
   end
-
-  System::Cache::setup(1, (ENV['RAILS_MAX_THREADS']  || 5))
-
+  
 end
 
 # Allow puma to be restarted by `rails restart` command.

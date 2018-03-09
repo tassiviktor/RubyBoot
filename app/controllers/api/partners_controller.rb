@@ -1,4 +1,7 @@
 class Api::PartnersController < ApplicationController
+
+  before_action :require_api_key!
+  
   before_action :set_api_partner, only: [:show, :update, :destroy]
 
   # GET /api/partners
