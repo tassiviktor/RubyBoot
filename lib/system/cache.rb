@@ -64,7 +64,9 @@ module System
     end
 
     def self.exists(category, key)
-    	conn.exists("#{category}:#{key}") 
+      self.redis_pool.with  do |conn|
+        conn.exists("#{category}:#{key}")
+      end
     end
 
     def self.generate_hashed_key(item, params)
@@ -72,7 +74,7 @@ module System
     end
 
     def pool
-      :redis_pool
+      self.redis_pool
     end
 
     private
