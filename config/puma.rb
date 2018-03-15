@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -10,13 +12,14 @@ threads_count = Integer(ENV['RAILS_MAX_THREADS'] || 5)
 
 threads threads_count, threads_count
 
-# Specifies the `port` that Puma will listen on to receive requests, default is 3000.
+# Specifies the `port` that Puma will listen on to receive requests,
+# default is 3000.
 #
-port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch('PORT') { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch('RAILS_ENV') { 'development' }
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
@@ -45,7 +48,6 @@ preload_app!
 #
 
 on_worker_boot do
-
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
   ActiveRecord::Base.connection_pool.disconnect!
@@ -53,10 +55,9 @@ on_worker_boot do
   ActiveSupport.on_load(:active_record) do
     config = Rails.application.config.database_configuration[Rails.env]
     config['reaping_frequency'] = ENV['DB_REAP_FREQ'] || 10 # seconds
-    config['pool']              = (ENV['RAILS_MAX_THREADS']  || 5)*2
+    config['pool']              = (ENV['RAILS_MAX_THREADS'] || 5) * 2
     ActiveRecord::Base.establish_connection
   end
-  
 end
 
 # Allow puma to be restarted by `rails restart` command.
