@@ -20,7 +20,7 @@ class Apiv2::UsersController < ApplicationController
     if @apiv2_user.save
       render json: @apiv2_user, status: :created, location: @apiv2_user
     else
-      render json: @apiv2_user.errors, status: :unprocessable_entity
+      respond_unprocessable @apiv2_user.errors
     end
   end
 
@@ -29,7 +29,7 @@ class Apiv2::UsersController < ApplicationController
     if @apiv2_user.update(apiv2_user_params)
       render json: @apiv2_user
     else
-      render json: @apiv2_user.errors, status: :unprocessable_entity
+      respond_unprocessable @apiv2_user.errors
     end
   end
 
