@@ -10,6 +10,7 @@ module Apiv2
       @apiv2_realms = Apiv2::Realm.all
 
       render json: @apiv2_realms
+
     end
 
     # GET /apiv2/realms/1
@@ -24,7 +25,7 @@ module Apiv2
       if @apiv2_realm.save
         render json: @apiv2_realm, status: :created, location: @apiv2_realm
       else
-        render json: @apiv2_realm.errors, status: :unprocessable_entity
+        respond_unprocessable @apiv2_realm.errors
       end
     end
 
@@ -33,7 +34,7 @@ module Apiv2
       if @apiv2_realm.update(apiv2_realm_params)
         render json: @apiv2_realm
       else
-        render json: @apiv2_realm.errors, status: :unprocessable_entity
+        respond_unprocessable @apiv2_realm.errors
       end
     end
 

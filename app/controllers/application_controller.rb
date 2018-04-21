@@ -13,7 +13,7 @@ class ApplicationController < ActionController::API
     respond_forbidden('Forbidden', 'Proper API key required') unless System::Security::ClientKey.authorize_key(api_key, request.remote_ip)
   end
 
-  private
+  protected
 
   def respond_internal_server_error(exception)
     logger.error exception.message
@@ -24,4 +24,9 @@ class ApplicationController < ActionController::API
   def respond_forbidden(message = 'Forbidden', details = '')
     render json: { error: message, 'details': details }, status: 403
   end
+
+  def respond_unprocessable(errors)
+    render json: errors, status: :unprocessable_entity
+  end
+
 end
