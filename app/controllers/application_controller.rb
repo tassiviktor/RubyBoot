@@ -1,4 +1,5 @@
 require 'system.rb'
+
 class ApplicationController < ActionController::API
 
   # Rescue from most common errors
@@ -6,8 +7,8 @@ class ApplicationController < ActionController::API
   rescue_from ScriptError, with: :respond_internal_server_error
 
   def require_api_key!
-    api_key = request.headers[( ENV["API_KEY_HEADER_FIELD"] || "HTTP_X_API_KEY" )]
-    respond_forbidden("Forbidden","Proper API key required") if !System::Security::ClientKey::authorize_key(api_key, request.remote_ip)
+    api_key = request.headers[(ENV["API_KEY_HEADER_FIELD"] || "HTTP_X_API_KEY")]
+    respond_forbidden("Forbidden", "Proper API key required") if !System::Security::ClientKey::authorize_key(api_key, request.remote_ip)
   end
 
   private
@@ -21,5 +22,4 @@ class ApplicationController < ActionController::API
   def respond_forbidden(message = 'Forbidden', details = '')
     render json: {:error => message, 'details' => details}, status: 403
   end
-
 end
