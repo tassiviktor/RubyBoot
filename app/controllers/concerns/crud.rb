@@ -5,6 +5,8 @@ module Crud
   # GET /apiv2/entity
   def index
     render json: self.class::RESOURCE_CLASS.all
+    #render json: self.class::RESOURCE_CLASS.joins(:users).all.as_json(include: :users)
+
   end
 
   # POST /apiv2/entity
@@ -12,7 +14,7 @@ module Crud
     @resource = self.class::RESOURCE_CLASS.new(resource_params)
 
     if @resource.save
-      render json: @resource, status: :created, location: @resource
+      render json: @resource, status: :created, location: @resource.as_json
     else
       respond_unprocessable @resource.errors
     end
@@ -20,13 +22,13 @@ module Crud
 
   # GET /apiv2/entity/id
   def show
-    render json: @resource
+    render json: @resource.build
   end
 
   # PATCH/PUT /apiv2/entity/1
   def update
     if @resource.update(resource_params)
-      render json: @resource
+      render json: @resource.as_json
     else
       respond_unprocessable @resource.errors
     end

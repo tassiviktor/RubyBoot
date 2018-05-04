@@ -4,7 +4,7 @@
 class CreateApiv2Users < ActiveRecord::Migration[5.1]
   def change
     create_table :apiv2_users do |t|
-      t.references :apiv2_realms, foreign_key: true, null: false
+      t.belongs_to :realm, foreign_key: {to_table: :apiv2_realms}, null: false
       t.boolean :admin, null: false, default: false
       t.string :username, null: false
       t.string :email, null: false

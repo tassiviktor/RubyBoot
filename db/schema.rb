@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180315141928) do
   end
 
   create_table "apiv2_users", force: :cascade do |t|
-    t.bigint "apiv2_realms_id", null: false
+    t.bigint "realm_id", null: false
     t.boolean "admin", default: false, null: false
     t.string "username", null: false
     t.string "email", null: false
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 20180315141928) do
     t.string "phone_no"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["apiv2_realms_id"], name: "index_apiv2_users_on_apiv2_realms_id"
+    t.index ["realm_id"], name: "index_apiv2_users_on_realm_id"
   end
 
-  add_foreign_key "apiv2_users", "apiv2_realms", column: "apiv2_realms_id"
+  add_foreign_key "apiv2_users", "apiv2_realms", column: "realm_id"
 end
