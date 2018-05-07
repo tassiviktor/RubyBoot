@@ -1,10 +1,11 @@
 module Crud
 
+  ApplicationController::before_action :"require_api_key!"
   ApplicationController::before_action :set_resource, only: %i[show update destroy]
-
+  
   # GET /apiv2/entity
   def index
-    render json: self.class::RESOURCE_CLASS.all
+    render json: self.class::RESOURCE_INDEX.all
     #render json: self.class::RESOURCE_CLASS.joins(:users).all.as_json(include: :users)
 
   end
@@ -22,7 +23,7 @@ module Crud
 
   # GET /apiv2/entity/id
   def show
-    render json: @resource.build
+    render json: @resource.as_json
   end
 
   # PATCH/PUT /apiv2/entity/1

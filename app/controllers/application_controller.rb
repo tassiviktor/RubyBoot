@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
 
   def require_api_key!
     api_key = request.headers[(ENV['API_KEY_HEADER_FIELD'] || 'HTTP_X_API_KEY')]
-    respond_forbidden('Forbidden', 'Proper API key required') unless System::Security::ClientKey.authorize_key(api_key, request.remote_ip)
+    respond_forbidden('Forbidden', 'Proper API key required') unless @api_key = System::Security::ClientKey.get_api_client(api_key, request.remote_ip)
   end
 
   protected
