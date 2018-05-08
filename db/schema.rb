@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315141928) do
+ActiveRecord::Schema.define(version: 20180508141044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20180315141928) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_api_keys_on_key", unique: true
+  end
+
+  create_table "api_keys_apiv2_realms", id: false, force: :cascade do |t|
+    t.bigint "api_key_id", null: false
+    t.bigint "realm_id", null: false
+    t.index ["api_key_id"], name: "index_api_keys_apiv2_realms_on_api_key_id"
+    t.index ["realm_id"], name: "index_api_keys_apiv2_realms_on_realm_id"
   end
 
   create_table "apiv2_realms", force: :cascade do |t|
@@ -53,5 +60,7 @@ ActiveRecord::Schema.define(version: 20180315141928) do
     t.index ["realm_id"], name: "index_apiv2_users_on_realm_id"
   end
 
+  add_foreign_key "api_keys_apiv2_realms", "api_keys"
+  add_foreign_key "api_keys_apiv2_realms", "apiv2_realms", column: "realm_id"
   add_foreign_key "apiv2_users", "apiv2_realms", column: "realm_id"
 end
