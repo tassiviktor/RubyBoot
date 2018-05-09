@@ -38,14 +38,17 @@ module System
     def self.hsetall(category, key, value, ttl = nil)
       pool.with do |conn|
         # Redis mapped_hmset cannot save array. Have to convert to set.
-        value = value.reduce({}) do |h, (k, v)|
-          if v.is_a? Array
-            h[k] = v.to_set
-          else
-            h[k] = v
-          end
-          h
-        end
+
+        #value = value.reduce({}) do |h, (k, v)|
+        #  if v.is_a? Array
+        #    h[k] = v.to_set
+        #  else
+        #    h[k] = v
+        #  end
+        #  h
+        #end
+        
+        value.hmap! {|k, v| [k, ((v.is_a? Array) ? v.to_set : v) ] }
 
         conn.mapped_hmset(self.build_key(category, key), value) &&
           conn.expireat(self.build_key(category, key), calc_expire(ttl))
