@@ -2,7 +2,7 @@ module System
   module Security
     class ClientKey
       CATEGORY_NAME = 'ApiKey'
-      KEYCACHE_TTL = 10
+      KEYCACHE_TTL = 86400
 
       def self.generate_key
         Digest::SHA2.hexdigest("#{Time.zone.now}:#{Random::rand(999999999)}::#{Random::rand(999999999)}")
@@ -14,7 +14,7 @@ module System
         apikey = System::Cache::hgetall(CATEGORY_NAME, key)
         if apikey.blank?
           apikey = System::Models::ApiKey.where(key: key).first
-          apikey = apikey.attributes if apikey.present?
+          apikey = apikey.as_json() if apikey.present?
         end
 
         unless apikey && validate_ip(client_ip, apikey[:ip_whitelist], apikey[:ip_blacklist])
