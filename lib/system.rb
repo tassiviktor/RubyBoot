@@ -10,6 +10,7 @@ end
 #  end
 #end
 
+# my custom extenstions. Is able to move to a more idiomatic place?
 class Hash
   def hmap(&block)
     Hash[self.map {|k, v| block.call(k,v) }]
@@ -24,5 +25,5 @@ class Hash
     end
     self
   end
-  
+
 end
