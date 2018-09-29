@@ -5,9 +5,7 @@ module Crud
   
   # GET /apiv2/entity
   def index
-    render json: self.class::RESOURCE_INDEX.all
-    #render json: self.class::RESOURCE_CLASS.joins(:users).all.as_json(include: :users)
-
+    render json: self.class::RESOURCE_CLASS.all
   end
 
   # POST /apiv2/entity
@@ -50,6 +48,6 @@ module Crud
 
   # Only allow a trusted parameter "white list" through.
   def resource_params
-    params.fetch(self.class::RESOURCE_SYM, {})
+    params.permit!
   end
 end
